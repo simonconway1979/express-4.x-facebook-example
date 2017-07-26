@@ -34,6 +34,7 @@ passport.use(new Strategy({
 // from the database when deserializing.  However, due to the fact that this
 // example does not have a database, the complete Facebook profile is serialized
 // and deserialized.
+
 passport.serializeUser(function(user, cb) {
   cb(null, user);
 });
@@ -41,7 +42,6 @@ passport.serializeUser(function(user, cb) {
 passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
-
 
 // Create a new Express application.
 var app = express();
@@ -75,9 +75,12 @@ app.get('/login',
   });
 
 app.get('/login/facebook',
-  passport.authenticate('facebook'));
+  passport.authenticate('facebook', {
+    scope: ['publish_actions', 'manage_pages']
+  }
+));
 
-app.get('/login/facebook/return', 
+app.get('/login/facebook/return',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
@@ -89,4 +92,6 @@ app.get('/profile',
     res.render('profile', { user: req.user });
   });
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log('Listening');
+})

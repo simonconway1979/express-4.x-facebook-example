@@ -23,3 +23,5 @@ $ CLIENT_ID=__FACEBOOK_CLIENT_ID__ CLIENT_SECRET=__FACEBOOK_CLIENT_SECRET__ node
 
 Open a web browser and navigate to [http://localhost:3000/](http://localhost:3000/)
 to see the example in action.
+
+CLIENT_ID='1444203639007177' CLIENT_SECRET='6ad757ad81bf212005f625563eb05930' node server.js
